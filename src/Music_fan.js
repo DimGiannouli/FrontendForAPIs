@@ -9,13 +9,11 @@ import {
   DataTableCell,
   DataTableBody,
   DataTableRow,
-  SimpleDialog,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogButton,
   DialogActions,
-  IconButton
 } from "rmwc";
 import "rmwc/dist/styles";
 import spotifyIcon from "./spotifyIcon.png";
@@ -40,7 +38,7 @@ class Music_fan extends React.Component {
     fetch(url, {
       headers: {
         Authorization:
-          "Bearer BQAb6M2ROrJHHtLuhkxRnmmhMu9utFdCHkwvGXoBXkePCq4vC8Udir_OvyYHgfofSOkXWkFazJzHtzMdpridZnHecUKiEejcN-NyVhJSb9C-1ofxLR4bSMbgGEItb5onB9faWXGZDp7n_7LLaMsT7mAd_B74KrIX92tYLAC6sTWcB28"
+          "Bearer BQBZjjRxAZ2H_VM-7LdIDaKsBIn4W7DUosKm3JNt-6hA8HfAFWgmawsTNYGD5qlhYQrph2LLDDL4vrhBVNz88krha__gVQFaSQxWKrxAIk_t6Qu9OLfbdGihiAuDn84GhaYBBDM8WLtxFkRz1dlJrWx_5zTBUCVgr3h8mbfYKbDTf70"
       }
     })
       .then(res => res.json())
@@ -111,7 +109,7 @@ class Music_fan extends React.Component {
                             fetch(url)
                               .then(res => res.text())
                               .then(result => {
-                                if (result == `{"lyrics":""}`) {
+                                if (result === `{"lyrics":""}`) {
                                   this.setState({
                                     lyricsVisible: true,
                                     selectedTrack: btl_tracks.name.substring(
