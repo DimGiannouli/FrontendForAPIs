@@ -44,7 +44,7 @@ class Music_fan extends React.Component {
       .then(res => res.json())
       .then(result => {
 
-        this.setState({ songs: result.tracks, loading: false });
+        this.setState({ tracks: result.tracks, loading: false });
       })
       .catch(error => console.log(error));
   }
@@ -68,10 +68,11 @@ class Music_fan extends React.Component {
           <div>loading...</div>
         ) : (
           <div className="tracklist">
-            <DataTable style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+            <DataTable style={{ backgroundColor: "rgba(255, 255, 255, 0.5)", display: 'flex' }}>
               <DataTableContent>
                 <DataTableBody>
-                  {this.state.songs.map(btl_tracks => (
+                  {
+                    this.state.tracks.map(btl_tracks => (
                     <DataTableRow>
                       <DataTableCell
                         style={{ color: "black", fontWeight: "bold" }}
