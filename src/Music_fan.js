@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogButton,
-  DialogActions,
+  DialogActions
 } from "rmwc";
 import "rmwc/dist/styles";
 import spotifyIcon from "./spotifyIcon.png";
@@ -38,12 +38,11 @@ class Music_fan extends React.Component {
     fetch(url, {
       headers: {
         Authorization:
-          "Bearer BQAbpPsdbB1x2ZxHSd0aOXl7N7luRoqgBfpC2Zb_HIfsngWn90XKXWe4gjFuIdQQDOglNy4PaT9yoU1ZqvQmw9Q7ECeIz03IzhNzyPfXvxxzf2JE8g_wbVp6Y-nt-6ti5g47BBa-_wnzw0akUnvrUZnbn8Rju9tEiZ6lybbd672FTfo"
+          "Bearer BQBvKbmXOmnuBIwve-9cRHtQ1Jcg6y65Ns9x8O72u3EWTl2EpIFcx6HdTnXu4nFm2lhuxt0U_sWVsvmuSsZyTN3OYGlHWeQ5f_gb5pSxEgKbgVhjeDAWYLOimtwbXdWkzdcbOPyptH0c8yOlxyPgsFg3tUaxazu57a_StZ87bjYTGnc"
       }
     })
       .then(res => res.json())
       .then(result => {
-
         this.setState({ tracks: result.tracks, loading: false });
       })
       .catch(error => console.log(error));
@@ -68,11 +67,15 @@ class Music_fan extends React.Component {
           <div>loading...</div>
         ) : (
           <div className="tracklist">
-            <DataTable style={{ backgroundColor: "rgba(255, 255, 255, 0.5)", display: 'flex' }}>
+            <DataTable
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
+                display: "flex"
+              }}
+            >
               <DataTableContent>
                 <DataTableBody>
-                  {
-                    this.state.tracks.map(btl_tracks => (
+                  {this.state.tracks.map(btl_tracks => (
                     <DataTableRow>
                       <DataTableCell
                         style={{ color: "black", fontWeight: "bold" }}
@@ -85,14 +88,18 @@ class Music_fan extends React.Component {
                       <DataTableCell>
                         <Button
                           raised
-                          style={{ backgroundColor: "#1DB954", color:"black", fontWeight: "bold" }}
+                          style={{
+                            backgroundColor: "#1DB954",
+                            color: "black",
+                            fontWeight: "bold"
+                          }}
                           onClick={() => {
                             this.openSpotifyLink(
                               btl_tracks.external_urls.spotify
                             );
                           }}
                           icon={spotifyIcon}
-                          label = "Listen on Spotify"
+                          label="Listen on Spotify"
                         />
                       </DataTableCell>
                       <DataTableCell>
