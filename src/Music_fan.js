@@ -38,7 +38,7 @@ class Music_fan extends React.Component {
     fetch(url, {
       headers: {
         Authorization:
-          "Bearer BQBvKbmXOmnuBIwve-9cRHtQ1Jcg6y65Ns9x8O72u3EWTl2EpIFcx6HdTnXu4nFm2lhuxt0U_sWVsvmuSsZyTN3OYGlHWeQ5f_gb5pSxEgKbgVhjeDAWYLOimtwbXdWkzdcbOPyptH0c8yOlxyPgsFg3tUaxazu57a_StZ87bjYTGnc"
+          "Bearer BQCtObgilBF4VhcDVn9bMCuytBDPK9qnV3yMczAIA-9539DfbRm9rX4RPhia4Agk0sVC4yFrGt6dut3GwnhVt6vgqdP52nMeiJmn6u4TAGRQHVnmgIn_SmRuARPuJS8I1jt2PVSLdpz3musHqwT4kIhXFanlrJ46aMVczhobOW3Xqt4"
       }
     })
       .then(res => res.json())
