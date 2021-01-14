@@ -30,15 +30,21 @@ class Music_fan extends React.Component {
     };
 
     this.openSpotifyLink = this.openSpotifyLink.bind(this);
+    this.displayLyrics = this.displayLyrics.bind(this);
+    this.fetchSpotify = this.fetchSpotify.bind(this);
   }
 
   componentDidMount() {
+    this.fetchSpotify();
+  }
+
+  fetchSpotify() {
     const url =
       "https://api.spotify.com/v1/artists/3WrFJ7ztbogyGnTHbHJFl2/top-tracks?market=US";
     fetch(url, {
       headers: {
         Authorization:
-          "Bearer BQCtObgilBF4VhcDVn9bMCuytBDPK9qnV3yMczAIA-9539DfbRm9rX4RPhia4Agk0sVC4yFrGt6dut3GwnhVt6vgqdP52nMeiJmn6u4TAGRQHVnmgIn_SmRuARPuJS8I1jt2PVSLdpz3musHqwT4kIhXFanlrJ46aMVczhobOW3Xqt4"
+          "Bearer BQACbYGEkdiReME97ggtX5-lRuPj3AIYaI8IFamxe_CEYacl6QYhCAHZe4lt8JGFd_eDahGyDB2xaSc76_bAVIVpIPdrf1Ibw-2PU6FX6sktBOKOKJnN8VNAe7_XDL6GUnKAoqjevlz1YaHtLOUedaebbqv2-U6gOIkxxbvjBJZlDvE"
       }
     })
       .then(res => res.json())
@@ -50,6 +56,30 @@ class Music_fan extends React.Component {
 
   openSpotifyLink(link: string) {
     window.open(link, "_newtab");
+  }
+
+  displayLyrics(songs: string) {
+    const songName = songs.substring(0, songs.indexOf("-"));
+    const url = "https://api.lyrics.ovh/v1/The%20Beatles/" + songName;
+    fetch(url)
+      .then(res => res.text())
+      .then(result => {
+        if (result === `{"lyrics":""}`) {
+          this.setState({
+            lyricsVisible: true,
+            selectedTrack: songs.substring(0, songs.indexOf("-")),
+            trackLyrics: "Sorry! Lyrics not found."
+          });
+        } else {
+          this.setState({
+            lyricsVisible: true,
+            selectedTrack: songs.substring(0, songs.indexOf("-")),
+            trackLyrics: result
+          });
+        }
+        console.log(result);
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -107,38 +137,7 @@ class Music_fan extends React.Component {
                           label="Lyrics"
                           style={{ color: "black", fontWeight: "bold" }}
                           onClick={() => {
-                            const songName = btl_tracks.name.substring(
-                              0,
-                              btl_tracks.name.indexOf("-")
-                            );
-                            const url =
-                              "https://api.lyrics.ovh/v1/The%20Beatles/" +
-                              songName;
-                            fetch(url)
-                              .then(res => res.text())
-                              .then(result => {
-                                if (result === `{"lyrics":""}`) {
-                                  this.setState({
-                                    lyricsVisible: true,
-                                    selectedTrack: btl_tracks.name.substring(
-                                      0,
-                                      btl_tracks.name.indexOf("-")
-                                    ),
-                                    trackLyrics: "Sorry! Lyrics not found."
-                                  });
-                                } else {
-                                  this.setState({
-                                    lyricsVisible: true,
-                                    selectedTrack: btl_tracks.name.substring(
-                                      0,
-                                      btl_tracks.name.indexOf("-")
-                                    ),
-                                    trackLyrics: result
-                                  });
-                                }
-                                console.log(result);
-                              })
-                              .catch(error => console.log(error));
+                            this.displayLyrics(btl_tracks.name);
                           }}
                         />
                       </DataTableCell>
